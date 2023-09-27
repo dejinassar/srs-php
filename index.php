@@ -84,7 +84,8 @@
                     </div>
                 </div>
             </div>
-            <div class="owl-carousel-item position-relative">
+            <div class="owl-carousel-item pos
+            aqition-relative">
                 <img class="img-fluid" src="img/carousel-2.jpg" alt="">
                 <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(24, 29, 56, .7);">
                     <div class="container">
