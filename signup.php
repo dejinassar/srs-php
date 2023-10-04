@@ -1,3 +1,6 @@
+<?php
+include_once("DB_Files/db.php");
+?>
 <!DOCTYPE html>
    <head>
       <meta charset="utf-8">
@@ -7,8 +10,7 @@
       <meta content="" name="description">
   
       <!-- Favicon -->
-      <link href="img/favicon.ico" rel="icon">
-  
+      <link rel="icon" href="img/download.png" type="image/png">
       <!-- Google Web Fonts -->
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,7 +37,41 @@
             transform: translateY(-50%);
             cursor: pointer;
         }
+        .error-message {
+            background-color: #ffcccc;
+            border: 1px solid #ff0000;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            color: #ff0000;
+            font-weight: bold;
+        }
+        #message-popup {
+            display: <?php echo $Message ? 'block' : 'none'; ?>;
+            background-color: #009688;
+            color: white;
+            padding: 10px;
+            position: relative;
+            margin-top: 20px; /* Add space between the form and the message */
+        }
 
+        .contact__form {
+            margin-top: 20px; /* Adjust the margin-top value as needed */
+        }
+
+        .close-button {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 10px;
+            cursor: pointer;
+            color: white; /* Text color for close button */
+            font-weight: bold; /* Make the close button more prominent */
+        }
+
+        .close-button:hover {
+            background-color: #333; /* Change background color on hover */
+        }
       </style>
  
     </head>
@@ -66,12 +102,46 @@
                 <a href="about.php" class="nav-item nav-link">About</a>
                 <a href="courses.php" class="nav-item nav-link">Courses</a>
                 <a href="contact.php" class="nav-item nav-link">Contact</a>
+                <?php
+            if (isset($_SESSION['stu_id'])) {
+                $stu_id = $_SESSION['stu_id'];
+                $sql = "SELECT stu_name, stu_img FROM students WHERE stu_id = $stu_id";
+                $result = $conn->query($sql);
+                if ($result && $result->num_rows > 0) {
+                    $user = $result->fetch_assoc();
+                    ?>
+                    <a class="nav-item nav-link" href="Users/Profile.php">
+                        <div class="profile-info">
+                            <?php
+                            if (isset($user['stu_img']) && !empty($user['stu_img'])) {
+                                // User has uploaded a profile picture, display it
+                                ?>
+                                <img src="<?php echo $user['stu_img']; ?>" alt="User Profile" class="profile-image">
+                                <?php
+                            } else {
+                                // User has not uploaded a profile picture, display a default user icon from Font Awesome
+                                ?>
+                                <i class="fa fa-user-circle profile-icon"></i>
+                                <?php
+                            }
+                            ?>
+                            <span class="profile-name"><?php echo $user['stu_name']; ?></span>
+                        </div>
+                    </a>
+                    <a class="nav-item nav-link" href="Users/Logout.php">Logout</a>
+                    <?php
+                }
+            } else {
+                ?>
                 <a href="login.php" class="nav-item nav-link">Login</a>
-          
-            </div>
-            <a href="signup.php" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Join Now<i class="fa fa-arrow-right ms-3"></i></a>
+                <a href="signup.php" class="btn btn-primary py-4 px-lg-5">Join Now<i class="fa fa-arrow-right ms-3"></i></a>
+                <?php
+            }
+            ?>
         </div>
-    </nav>
+    </div>
+</nav>
+
     <!-- Navbar End -->
 <div class="container mt-5">
         <div class="row justify-content-center">
@@ -79,91 +149,63 @@
                 <div class="card">
                     <div class="card-body">
                         <h2 class="card-title text-center">Sign Up</h2>
-                        <form>
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Name</label>
-                                <input type="text" class="form-control" id="name" placeholder="Your name" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="Your email" required>
-                            </div>
-                            <div class="mb-3 position-relative">
-                                <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="password" placeholder="Your password" required>
-                                <i class="fa fa-eye password-toggle" onclick="togglePasswordVisibility('password')"></i>
-                            </div>
-                            <div class="mb-3 position-relative">
-                                <label for="confirm-password" class="form-label">Confirm Password</label>
-                                <input type="password" class="form-control" id="confirm-password" placeholder="Confirm your password" required>
-                                <i class="fa fa-eye password-toggle" onclick="togglePasswordVisibility('confirm-password')"></i>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Sign Up</button>
-                        </form>
+                        <div id="response-message">
+        <?php
+        if (!empty($error_msg)) {
+            echo '<div class="alert alert-danger error-message">';
+            foreach ($error_msg as $error) {
+                echo $error . "<br>";
+            }
+            echo '</div>';
+        }
+        ?>
+    </div>
+    <div id="message-popup" class="mb-4">
+        <?php echo $Message; ?>
+        <span class="close-button" onclick="closeMessage()">X</span>
+    </div>
+                        <form action="" method="POST" class="form" id="register">
+    <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="Your Full name" required <?php echo 'value="' . $fname . '"' ?>>
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="Your email" required <?php echo 'value="' . $mail . '"' ?>>
+    </div>
+    <div class="mb-3 position-relative">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Your password" required <?php echo 'value="' . $password . '"' ?>>
+        <i class="fa fa-eye password-toggle" onclick="togglePasswordVisibility('password')"></i>
+    </div>
+    <div class="mb-3 position-relative">
+        <label for="confirm-password" class="form-label">Confirm Password</label>
+        <input type="password" class="form-control" id="confirm-password" name="c_password" placeholder="Confirm your password" required <?php echo 'value="' . $cpassword . '"' ?>>
+        <i class="fa fa-eye password-toggle" onclick="togglePasswordVisibility('confirm-password')"></i>
+    </div>
+    <button type="submit" class="btn btn-primary" name="signup">Sign Up</button>
+</form>
+
+                        <p class="mt-3 text-center">Already have an account? <a href="login.php">Sign In</a></p>
+               
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
-    <!-- Footer Start -->
-    <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
-        <div class="container py-5">
-            <div class="row g-5">
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-white mb-3">Quick Link</h4>
-                    <a class="btn btn-link" href="">About Us</a>
-                    <a class="btn btn-link" href="">Contact Us</a>
-                    <a class="btn btn-link" href="">Privacy Policy</a>
-                    <a class="btn btn-link" href="">Terms & Condition</a>
-                    <a class="btn btn-link" href="">FAQs & Help</a>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-white mb-3">Contact</h4>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, Alao Akala Road Akobo Ibadan, Nigeria</p>
-                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+234 345 67890</p>
-                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@pediforte.com</p>
-                    <div class="d-flex pt-2">
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-white mb-3">Newsletter</h4>
-                    <p>Subscribe to our newsletter.</p>
-                    <div class="position-relative mx-auto" style="max-width: 400px;">
-                        <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="copyright">
-                <div class="row">
-                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        &copy; <a class="border-bottom">Pediforte</a>, All Right Reserved.
+    <!-- Add this <div> below your form -->
+<div id="response-message"></div>
 
-                    </div>
-                    <div class="col-md-6 text-center text-md-end">
-                        <div class="footer-menu">
-                            <a href="">Home</a>
-                            <a href="">Help</a>
-                            <a href="">FQAs</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Footer End -->
-
+    <?php
+include_once("Inc/footer.php");
+?>
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     <script>
+         function closeMessage() {
+        document.getElementById('message-popup').style.display = 'none';
+    }
         function togglePasswordVisibility(inputId) {
             const passwordField = document.getElementById(inputId);
             const eyeIcon = passwordField.nextElementSibling;
@@ -179,7 +221,8 @@
             }
         }
     </script>
-    
+
+
 
     <!-- JavaScript and Footer -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
