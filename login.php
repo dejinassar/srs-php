@@ -1,34 +1,7 @@
 <?php
-session_start();
+include_once("Inc/header.php");
+
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Pediforte</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
-
-    <!-- Favicon -->
-    <link rel="icon" href="img/download.png" type="image/png">
-
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
-
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/login.css">
     <style>
         .password-toggle {
@@ -61,61 +34,6 @@ session_start();
     </div>
 </div>
 <!-- Spinner End -->
-
-<!-- Navbar Start -->
-<nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
-    <a href="index.php" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-        <h2 class="m-0 text-primary"><i class="fa fa-book me-3"></i>Pediforte</h2>
-    </a>
-    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-        <div class="navbar-nav ms-auto p-4 p-lg-0">
-            <a href="index.php" class="nav-item nav-link active">Home</a>
-            <a href="about.php" class="nav-item nav-link">About</a>
-            <a href="courses.php" class="nav-item nav-link">Courses</a>
-            <a href="contact.php" class="nav-item nav-link">Contact</a>
-            <?php
-            if (isset($_SESSION['stu_id'])) {
-                $stu_id = $_SESSION['stu_id'];
-                $sql = "SELECT stu_name, stu_img FROM students WHERE stu_id = $stu_id";
-                $result = $conn->query($sql);
-                if ($result && $result->num_rows > 0) {
-                    $user = $result->fetch_assoc();
-                    ?>
-                    <a class="nav-item nav-link" href="Users/Profile.php">
-                        <div class="profile-info">
-                            <?php
-                            if (isset($user['stu_img']) && !empty($user['stu_img'])) {
-                                // User has uploaded a profile picture, display it
-                                ?>
-                                <img src="<?php echo $user['stu_img']; ?>" alt="User Profile" class="profile-image">
-                                <?php
-                            } else {
-                                // User has not uploaded a profile picture, display a default user icon from Font Awesome
-                                ?>
-                                <i class="fa fa-user-circle profile-icon"></i>
-                                <?php
-                            }
-                            ?>
-                            <span class="profile-name"><?php echo $user['stu_name']; ?></span>
-                        </div>
-                    </a>
-                    <a class="nav-item nav-link" href="Users/Logout.php">Logout</a>
-                    <?php
-                }
-            } else {
-                ?>
-                <a href="login.php" class="nav-item nav-link">Login</a>
-                <a href="signup.php" class="btn btn-primary py-4 px-lg-5">Join Now<i class="fa fa-arrow-right ms-3"></i></a>
-                <?php
-            }
-            ?>
-        </div>
-    </div>
-</nav>
-<!-- Navbar End -->
 
 <!-- Login Form -->
 <div class="container mt-5">
