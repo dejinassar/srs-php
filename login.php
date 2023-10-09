@@ -2,118 +2,113 @@
 include_once("Inc/header.php");
 
 ?>
-    <link rel="stylesheet" href="css/login.css">
-    <style>
-        .password-toggle {
-            position: absolute;
-            top: 80%;
-            right: 10px;
-            transform: translateY(-50%);
-            cursor: pointer;
-        }
-        .error-message {
-            background-color: #ffcccc;
-            border: 1px solid #ff0000;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            color: #ff0000;
-            font-weight: bold;
-        }
-        #error-box {
-            display: <?php echo !empty($_SESSION['errors']) ? 'block' : 'none'; ?>;
-        }
-    </style>
+<link rel="stylesheet" href="css/login.css">
+<style>
+    .password-toggle {
+        position: absolute;
+        top: 80%;
+        right: 10px;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+
+    .error-message {
+        background-color: #ffcccc;
+        border: 1px solid #ff0000;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        color: #ff0000;
+        font-weight: bold;
+    }
+
+    #error-box {
+        display: <?php echo !empty($_SESSION['errors']) ? 'block' : 'none'; ?>;
+    }
+</style>
 </head>
+
 <body>
 
-<!-- Spinner Start -->
-<div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-        <span class="sr-only">Loading...</span>
-    </div>
-</div>
-<!-- Spinner End -->
 
-<!-- Login Form -->
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <h2 class="card-title text-center">Login</h2>
-                    <div id="error-box">
-                        <?php
-                        if (!empty($_SESSION['errors'])) {
-                            echo '<div class="alert alert-danger error-message">';
-                            foreach ($_SESSION['errors'] as $error) {
-                                echo $error . "<br>";
+    <!-- Login Form -->
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title text-center">Login</h2>
+                        <div id="error-box">
+                            <?php
+                            if (!empty($_SESSION['errors'])) {
+                                echo '<div class="alert alert-danger error-message">';
+                                foreach ($_SESSION['errors'] as $error) {
+                                    echo $error . "<br>";
+                                }
+                                echo '</div>';
+                                unset($_SESSION['errors']); // Clear the errors once displayed
                             }
-                            echo '</div>';
-                            unset($_SESSION['errors']); // Clear the errors once displayed
-                        }
-                        ?>
-                    </div>
-                    <form action="signinDb.php" method="POST" class="form" id="login">
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email2" placeholder="Your email" required>
+                            ?>
                         </div>
-                        <div class="mb-3 position-relative">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" name="password2" id="password" placeholder="Your password" required>
-                            <i class="fa fa-eye password-toggle" onclick="togglePasswordVisibility('password')"></i>
-                        </div>
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">
-                            <label class="form-check-label" for="rememberMe">Remember Me</label>
-                        </div>
-                        <button type="submit" name="login" class="btn btn-primary">Login</button>
-                    </form>
+                        <form action="signinDb.php" method="POST" class="form" id="login">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email2" placeholder="Your email" required>
+                            </div>
+                            <div class="mb-3 position-relative">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" name="password2" id="password" placeholder="Your password" required>
+                                <i class="fa fa-eye password-toggle" onclick="togglePasswordVisibility('password')"></i>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">
+                                <label class="form-check-label" for="rememberMe">Remember Me</label>
+                            </div>
+                            <button type="submit" name="login" class="btn btn-primary">Login</button>
+                        </form>
 
-                    <!-- Forgot Password and Create an Account Links -->
-                    <div class="mt-3 text-center">
-                        <a href="forget-password.php">Forgot Password?</a>
-                        <span class="mx-2">|</span>
-                        <a href="signup.php">Create an Account</a>
+                        <!-- Forgot Password and Create an Account Links -->
+                        <div class="mt-3 text-center">
+                            <a href="forget-password.php">Forgot Password?</a>
+                            <span class="mx-2">|</span>
+                            <a href="signup.php">Create an Account</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<?php
-include_once("Inc/footer.php");
-?>
+    <?php
+    include_once("Inc/footer.php");
+    ?>
 
-<!-- Back to Top -->
-<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
-<script>
-    function togglePasswordVisibility(inputId) {
-        const passwordField = document.getElementById(inputId);
-        const eyeIcon = passwordField.nextElementSibling;
+    <script>
+        function togglePasswordVisibility(inputId) {
+            const passwordField = document.getElementById(inputId);
+            const eyeIcon = passwordField.nextElementSibling;
 
-        if (passwordField.type === "password") {
-            passwordField.type = "text";
-            eyeIcon.classList.remove("fa-eye");
-            eyeIcon.classList.add("fa-eye-slash");
-        } else {
-            passwordField.type = "password";
-            eyeIcon.classList.remove("fa-eye-slash");
-            eyeIcon.classList.add("fa-eye");
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                eyeIcon.classList.remove("fa-eye");
+                eyeIcon.classList.add("fa-eye-slash");
+            } else {
+                passwordField.type = "password";
+                eyeIcon.classList.remove("fa-eye-slash");
+                eyeIcon.classList.add("fa-eye");
+            }
         }
-    }
-</script>
+    </script>
 
-<!-- JavaScript and Footer -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="lib/wow/wow.min.js"></script>
-<script src="lib/easing/easing.min.js"></script>
-<script src="lib/waypoints/waypoints.min.js"></script>
-<script src="lib/owlcarousel/owl.carousel.min.js"></script>
-<script src="js/main.js"></script>
+    <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
 </body>
+
 </html>

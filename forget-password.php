@@ -1,65 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<?php
-include_once("Inc/header.php");
-include_once("DB_Files/db.php");
-?>
-   <style>
-    /* Custom styles for the Forgot Password page */
-body {
-    background-color: #f8f9fa;
-    font-family: Arial, sans-serif;
-}
+    <?php
+    include_once("Inc/header.php");
+    include_once("DB_Files/db.php");
+    ?>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
 
-.card {
-    border: none;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-}
+        .card {
+            border: none;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
-.card-title {
-    font-size: 24px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 20px;
-}
+        .card-title {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-.form-label {
-    font-weight: bold;
-}
-
+        .form-label {
+            font-weight: bold;
+        }
 
 
-.alert-danger {
-    background-color: #f8d7da;
-    color: #721c24;
-    border-color: #f5c6cb;
-    margin-top: 20px;
-}
 
-.text-center {
-    text-align: center;
-}
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-color: #f5c6cb;
+            margin-top: 20px;
+        }
 
-.mt-3 {
-    margin-top: 15px;
-}
+        .text-center {
+            text-align: center;
+        }
 
-/* Adjust the container width and spacing */
-.container {
-    margin-top: 50px;
-}
-</style>
+        .mt-3 {
+            margin-top: 15px;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+    </style>
 </head>
-<body>
-    <!-- Spinner Start -->
-    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-    </div>
-    <!-- Spinner End -->
 
+<body>
     <!-- Forgot Password Form -->
     <div class="container mt-5">
         <div class="row justify-content-center">
@@ -67,16 +59,6 @@ body {
                 <div class="card">
                     <div class="card-body">
                         <h2 class="card-title text-center">Forgot Password</h2>
-                        <!-- Error Box -->
-                        <?php
-                        if (!empty($errors)) {
-                            echo '<div class="alert alert-danger">';
-                            foreach ($errors as $error) {
-                                echo $error . '<br>';
-                            }
-                            echo '</div>';
-                        }
-                        ?>
                         <form action="forget-password.php" method="POST" class="form" id="forgot-password">
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
@@ -94,10 +76,7 @@ body {
         </div>
     </div>
     <?php
-include_once("Inc/footer.php");?>
-
-    <!-- Back to Top button -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    include_once("Inc/footer.php"); ?>
 
     <!-- JavaScript and Footer -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -108,4 +87,5 @@ include_once("Inc/footer.php");?>
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
 </body>
+
 </html>

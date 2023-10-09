@@ -2,6 +2,89 @@
 include_once("DB_Files/db.php");
 include_once("Inc/header.php");
 
+$fname = '';
+$mail = '';
+$password = '';
+$cpassword = '';
+$error_msg = array();
+$Message = '';
+$success = false;
+
+if (isset($_POST['signup'])) {
+    $fname = $_POST['name'];
+    $mail = $_POST['email'];
+    $password = $_POST['password'];
+    $cpassword = $_POST['c_password'];
+
+    // Name Validation
+    $name = $_POST['name'];
+    if (empty($name)) {
+        $error_msg['Name'] = "Full Name is Required";
+    } elseif (!preg_match("/^[a-zA-Z -]*$/", $name)) {
+        $error_msg['Name'] = "Name Must be Only Letters";
+    } elseif (strlen($name) < 5) {
+        $error_msg['Name'] = "Name Must be Minimum 5 Letters";
+    }
+
+    // Email Validation
+    $email = $_POST['email'];
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error_msg['Email'] = "Invalid Email Address";
+    }
+
+    // Password Validation
+    $pass = $_POST['password'];
+    if (empty($pass)) {
+        $error_msg['Password'] = "Password is Required";
+    }
+
+    // Confirm Password Validation
+    $pass2 = $_POST['c_password'];
+    if (empty($pass2)) {
+        $error_msg['C_password'] = "Confirm Password is Required";
+    }
+
+    // Check if passwords match
+    if ($pass != $pass2) {
+        $error_msg['C_password'] = "Passwords Do Not Match";
+    }
+
+    // Password Strength Validation
+    if (
+        !preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z@&$!#*^%]{6,20}$/', $pass)
+    ) {
+        $error_msg['Password'] = "Password must meet the following criteria:";
+        $error_msg['Password_1'] = "- At least 6 characters.";
+        $error_msg['Password_2'] = "- At least one digit (0-9).";
+        $error_msg['Password_3'] = "- At least one letter (uppercase or lowercase, A-Za-z).";
+    }
+
+    // Signup Code
+    if (empty($error_msg)) {
+        // Check if the email is already taken
+        $email_query = "SELECT * FROM students WHERE stu_email='$email'";
+        $email_query_run = mysqli_query($conn, $email_query);
+        if (mysqli_num_rows($email_query_run) > 0) {
+            $error_msg['Email'] = "Email Already Taken";
+        } else {
+            // Hash the password
+            $hashed_password = password_hash($pass, PASSWORD_DEFAULT);
+
+            // Insert user data into the database
+            $sql = "INSERT INTO students (stu_name, stu_email, stu_pass) VALUES ('$name', '$email', '$hashed_password')";
+            if ($conn->query($sql)) {
+                $success = true;
+                $Message = "Registration Successful. You can now login.";
+                $fname = "";
+                $mail = "";
+                $password = '';
+                $cpassword = '';
+            } else {
+                $error_msg['Server'] = "Server Error";
+            }
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -58,12 +141,10 @@ include_once("Inc/header.php");
             padding: 10px;
             position: relative;
             margin-top: 20px;
-            /* Add space between the form and the message */
         }
 
         .contact__form {
             margin-top: 20px;
-            /* Adjust the margin-top value as needed */
         }
 
         .close-button {
@@ -73,29 +154,17 @@ include_once("Inc/header.php");
             padding: 10px;
             cursor: pointer;
             color: white;
-            /* Text color for close button */
             font-weight: bold;
-            /* Make the close button more prominent */
         }
 
         .close-button:hover {
             background-color: #333;
-            /* Change background color on hover */
         }
     </style>
 
 </head>
 
 <body>
-
-
-    <!-- Spinner Start -->
-    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-    </div>
-    <!-- Spinner End -->
 
     <!-- Navbar End -->
     <div class="container mt-5">
@@ -148,15 +217,11 @@ include_once("Inc/header.php");
             </div>
         </div>
     </div>
-    <!-- Add this <div> below your form -->
-    <div id="response-message"></div>
 
     <?php
     include_once("Inc/footer.php");
     ?>
 
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     <script>
         function closeMessage() {
             document.getElementById('message-popup').style.display = 'none';

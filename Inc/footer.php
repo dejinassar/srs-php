@@ -36,7 +36,7 @@
                         <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
                             &copy; 2023 Pediforte
                         </div>
-                       </div>
+                    </div>
                 </div>
             </div>
         </div>

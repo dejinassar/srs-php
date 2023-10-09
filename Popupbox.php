@@ -31,7 +31,7 @@ include_once("DB_Files/db.php");
 
     html,
     body {
-        background-color: #f0f0f0; /* Changed background color */
+        background-color: #f0f0f0;
         font-size: 18px;
         font-family: 'Titillium Web', sans-serif;
     }
@@ -53,16 +53,16 @@ include_once("DB_Files/db.php");
         user-select: none;
         display: flex;
         justify-content: center;
-        align-items: center; /* Center vertically and horizontally */
+        align-items: center;
     }
 
     .popup-box-container {
-        background-color: #ffffff; /* Changed background color */
+        background-color: #ffffff;
         width: 400px;
         text-align: center;
         border-radius: 10px;
         padding: 20px;
-        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); /* Added box shadow */
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
     }
 
     .check-container i {
@@ -70,7 +70,7 @@ include_once("DB_Files/db.php");
         color: red;
         opacity: 0.6;
         font-size: 70px;
-        margin: 20px 0; /* Adjusted margin */
+        margin: 20px 0;
         padding: 20px;
     }
 
@@ -88,11 +88,11 @@ include_once("DB_Files/db.php");
         width: 25%;
         font-size: 18px;
         cursor: pointer;
-        transition: background-color 0.3s; /* Smooth button hover effect */
+        transition: background-color 0.3s;
     }
 
     .ok-btn:hover {
-        background-color: #009e7c; /* Change button color on hover */
+        background-color: #009e7c;
     }
 
     @media only screen and (max-width: 400px) {

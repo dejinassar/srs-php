@@ -21,45 +21,43 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 ?>
 <style>
-   #message-popup {
-    display: <?php echo $Message ? 'block' : 'none'; ?>;
-    background-color: #009688;
-    color: white;
-    padding: 10px;
-    position: relative;
-    margin-top: 20px; /* Add space between the form and the message */
-}
-.contact__form {
-        margin-top: 20px; /* Adjust the margin-top value as needed */
+    #message-popup {
+        display: <?php echo $Message ? 'block' : 'none'; ?>;
+        background-color: #009688;
+        color: white;
+        padding: 10px;
+        position: relative;
+        margin-top: 20px;
+        /* Add space between the form and the message */
+    }
+
+    .contact__form {
+        margin-top: 20px;
+        /* Adjust the margin-top value as needed */
     }
 
 
-.close-button {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 10px;
-    cursor: pointer;
-    color: white; /* Text color for close button */
-    font-weight: bold; /* Make the close button more prominent */
-}
+    .close-button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 10px;
+        cursor: pointer;
+        color: white;
+        /* Text color for close button */
+        font-weight: bold;
+        /* Make the close button more prominent */
+    }
 
-.close-button:hover {
-    background-color: #333; /* Change background color on hover */
-}
-
-   </style>
+    .close-button:hover {
+        background-color: #333;
+        /* Change background color on hover */
+    }
+</style>
 
 </head>
 
 <body>
-    <!-- Spinner Start -->
-   <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-    </div>
-    <!-- Spinner End -->
 
     <!-- Header Start -->
     <div class="container-fluid bg-primary py-5 mb-5 page-header">
@@ -118,39 +116,39 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-lg-4 col-md-12 wow fadeInUp" data-wow-delay="0.5s">
-                <form action="" method="POST" class="contact__form">
-            <!-- Message popup div -->
-            <?php if ($Message) : ?>
-                <div id="message-popup" class="mb-4">
-                    <?php echo $Message; ?>
-                    <span class="close-button" onclick="closeMessage()">X</span>
-                </div>
-            <?php endif; ?>
-          
+                    <form action="" method="POST" class="contact__form">
+                        <!-- Message popup div -->
+                        <?php if ($Message) : ?>
+                            <div id="message-popup" class="mb-4">
+                                <?php echo $Message; ?>
+                                <span class="close-button" onclick="closeMessage()">X</span>
+                            </div>
+                        <?php endif; ?>
+
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" name ="First_Name" id="First Name" placeholder="Your First Name" required>
+                                    <input type="text" class="form-control" name="First_Name" id="First Name" placeholder="Your First Name" required>
                                     <label for="First Name">First Name</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control"name ="Last_Name" id="Last Name" placeholder="Your Last Name" required>
+                                    <input type="text" class="form-control" name="Last_Name" id="Last Name" placeholder="Your Last Name" required>
                                     <label for="Last Name">Your Last Name</label>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <input type="email" class="form-control"name ="Email_Address" id="Email Address" placeholder="Your Email Address" required>
+                                    <input type="email" class="form-control" name="Email_Address" id="Email Address" placeholder="Your Email Address" required>
                                     <label for="Email Address">Email Address</label>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <textarea class="form-control"name ="Message" placeholder="Leave a message here" id="Message" style="height: 150px" required></textarea>
+                                    <textarea class="form-control" name="Message" placeholder="Leave a message here" id="Message" style="height: 150px" required></textarea>
                                     <label for="Message">Message</label>
                                 </div>
                             </div>
@@ -166,19 +164,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <!-- Contact End -->
 
     <?php
-include_once("Inc/footer.php");?>
-
-
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-
-
-<!-- JavaScript for closing the message popup -->
-<script>
-    function closeMessage() {
-        document.getElementById('message-popup').style.display = 'none';
-    }
-</script>
+    include_once("Inc/footer.php"); ?>
+    <!-- JavaScript for closing the message popup -->
+    <script>
+        function closeMessage() {
+            document.getElementById('message-popup').style.display = 'none';
+        }
+    </script>
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -186,7 +178,5 @@ include_once("Inc/footer.php");?>
     <script src="lib/easing/easing.min.js"></script>
     <script src="lib/waypoints/waypoints.min.js"></script>
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-
-    <!-- Template Javascript -->
     <script src="js/main.js"></script>
 </body>

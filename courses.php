@@ -4,18 +4,17 @@ include_once("DB_Files/db.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <style>
-        /* Add these styles for better UI */
         body {
             font-family: 'Heebo', sans-serif;
             background-color: #f8f9fa;
         }
 
-        /* Categories styles */
         .category {
             background-color: #ffffff;
             padding: 40px 0;
@@ -47,7 +46,6 @@ include_once("DB_Files/db.php");
             transform: scale(1.05);
         }
 
-        /* Courses styles */
         .courses {
             background-color: #ffffff;
             padding: 60px 0;
@@ -60,7 +58,6 @@ include_once("DB_Files/db.php");
             margin-bottom: 40px;
         }
 
-        /* New styles for responsive course cards */
         .courses__container {
             display: flex;
             flex-wrap: wrap;
@@ -83,7 +80,6 @@ include_once("DB_Files/db.php");
             height: auto;
         }
 
-        /* Responsive adjustments */
         @media screen and (max-width: 768px) {
             .course {
                 flex: 1 1 calc(50% - 20px);
@@ -95,7 +91,6 @@ include_once("DB_Files/db.php");
                 flex: 1 1 100%;
             }
 
-            /* Adjust styles for smaller screens */
             .course h3 {
                 font-size: 20px;
             }
@@ -108,41 +103,24 @@ include_once("DB_Files/db.php");
                 font-size: 20px;
             }
         }
+
         .course__info {
             display: flex;
             flex-direction: column;
-            align-items: center; /* Center horizontally */
-            text-align: center; /* Center text within the card */
+            align-items: center;
+            text-align: center;
         }
 
         .course__info h3,
         .course__info h5,
         .course__info h4,
         .course__info .button {
-            margin: 10px 0; /* Add some spacing between elements */
+            margin: 10px 0;
         }
-
-
-        /* Search Bar styles */
-        .search-bar {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .search-bar input {
-            max-width: 300px;
-        }
- 
     </style>
 </head>
+
 <body>
-    <!-- Spinner Start -->
-    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-    </div>
-    <!-- Spinner End -->
     <!-- Header End -->
     <div class="container-fluid bg-primary py-5 mb-5 page-header">
         <div class="container py-5">
@@ -159,13 +137,7 @@ include_once("DB_Files/db.php");
             </div>
         </div>
     </div>
-    <!-- Search Bar -->
-    <div class="container search-bar">
-        <input type="text" class="form-control" id="search_text" name="search_text" placeholder="Search Here">
-    </div>
 
-    <!-- Search Results -->
-    <div id="result" class="courses__container"></div>
 
     <!-- Courses Start -->
     <div class="container-xxl py-5">
@@ -174,11 +146,11 @@ include_once("DB_Files/db.php");
                 <h6 class="section-title bg-white text-center text-primary px-3">Courses</h6>
                 <h1 class="mb-5">Popular Courses</h1>
             </div>
-    </div>
+        </div>
     </div>
     <section class="courses">
         <div class="container courses__container">
-        <?php
+            <?php
             $sql = "SELECT * FROM course";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
@@ -201,57 +173,12 @@ include_once("DB_Files/db.php");
                     </article>';
                 }
             }
-        ?>
+            ?>
         </div>
     </section>
 </body>
+
 </html>
-
-<script>
-    //Animation Scroll
-    function reveal() {
-        var reveals = document.querySelectorAll(".reveal");
-
-        for (var i = 0; i < reveals.length; i++) {
-            var windowHeight = window.innerHeight;
-            var elementTop = reveals[i].getBoundingClientRect().top;
-            var elementVisible = 150;
-
-            if (elementTop < windowHeight - elementVisible) {
-                reveals[i].classList.add("active");
-            } else {
-                reveals[i].classList.remove("active");
-            }
-        }
-    }
-
-    window.addEventListener("scroll", reveal);
-</script>
-
-<script>
-    $(document).ready(function(){
-        $('#search_text').keyup(function(){
-            var txt = $(this).val();
-            if(txt != ''){
-                $('#result').html('');
-                $.ajax({
-                    url: "course_fetch.php",
-                    type: "post",
-                    data: {search: txt},
-                    dataType: "text",
-                    success: function (data) {
-                        $('#result').html(data);
-                    }
-                });
-            } else {
-                $('#result').html(''); // Clear the search results when the input is empty
-            }
-        });
-    });
-</script>
-<!-- Back to Top -->
-<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-
 <?php
 include_once("Inc/Footer.php");
 ?>
@@ -261,6 +188,4 @@ include_once("Inc/Footer.php");
 <script src="lib/easing/easing.min.js"></script>
 <script src="lib/waypoints/waypoints.min.js"></script>
 <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-
-<!-- Template Javascript -->
 <script src="js/main.js"></script>
