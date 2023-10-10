@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 08, 2023 at 09:37 PM
+-- Generation Time: Oct 10, 2023 at 02:32 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -55,16 +55,6 @@ CREATE TABLE `contact` (
   `sent_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `contact`
---
-
-INSERT INTO `contact` (`id`, `f_name`, `l_name`, `email`, `msg`, `sent_date`) VALUES
-(24, '', '', 'vvbn2@gmail.com', '', '0000-00-00 00:00:00'),
-(25, '', '', 'vvbn2@gmail.com', '', '0000-00-00 00:00:00'),
-(26, 'ibfg', 'vbnnb', 'vvbn2@gmail.com', 'sadfghjkiyutre', '0000-00-00 00:00:00'),
-(27, 'ibfg', 'vbnnb', 'vvbn2@gmail.com', 'tyuiouygyfhgjkk', '0000-00-00 00:00:00');
-
 -- --------------------------------------------------------
 
 --
@@ -99,8 +89,6 @@ INSERT INTO `course` (`course_id`, `course_name`, `course_desc`, `course_author`
 
 CREATE TABLE `courseorder` (
   `co_id` int(11) NOT NULL,
-  `order_id` varchar(255) NOT NULL,
-  `stu_name` varchar(255) NOT NULL,
   `stu_email` varchar(255) NOT NULL,
   `course_id` int(11) NOT NULL,
   `course_name` varchar(255) NOT NULL,
@@ -112,14 +100,9 @@ CREATE TABLE `courseorder` (
 -- Dumping data for table `courseorder`
 --
 
-INSERT INTO `courseorder` (`co_id`, `order_id`, `stu_name`, `stu_email`, `course_id`, `course_name`, `amount`, `date`) VALUES
-(1, '62758f25b3dba', 'madura', 'maduraprasad.lk@gmail.com', 9, 'iOS & Swift - The Complete iOS App Development Bootcamp', '$0', '2022-05-07'),
-(2, '62762ca7b8fc5', 'madura', 'maduraprasad.lk@gmail.com', 12, 'PHP with Laravel for beginners - Become a Master in Laravel', '$0', '2022-05-07'),
-(3, '64ff738115a27', 'Ibrahim', 'dejinassar@gmail.com', 1, 'Java Programming Masterclass covering Java 11 & Java 17', '$12.99', '2023-09-12'),
-(4, '6503081773810', 'Ibrahim', 'ib@gmail.com', 10, 'Full Stack-site complet Front REACT & Back PHP/MySQL/MVC/POO', '$9.99', '2023-09-14'),
-(5, '65031e626ed53', 'Ibrahim', 'ib@gmail.com', 3, 'Build Responsive Real-World Websites with HTML and CSS', '$0', '2023-09-14'),
-(6, '650b0a31c39c7', 'Ibrahim', 'dejinassar@gmail.com', 3, 'Build Responsive Real-World Websites with HTML and CSS', '$0', '2023-09-20'),
-(11, '', '', 'nassar@gmail.com', 2, 'The Complete JavaScript Course 2023: From Zero to Expert!', '0', '2023-10-05');
+INSERT INTO `courseorder` (`co_id`, `stu_email`, `course_id`, `course_name`, `amount`, `date`) VALUES
+(22, 'nassar@gmail.com', 2, 'The Complete JavaScript Course 2023: From Zero to Expert!', '0', '2023-10-10'),
+(23, 'nassar@gmail.com', 3, 'Build Responsive Real-World Websites with HTML and CSS', '0', '2023-10-10');
 
 -- --------------------------------------------------------
 
@@ -171,7 +154,7 @@ CREATE TABLE `students` (
 
 INSERT INTO `students` (`stu_id`, `stu_name`, `stu_email`, `stu_pass`, `stu_occ`, `stu_img`) VALUES
 (11, 'Ibrahim Nassar', 'dejinassar@gmail.com', '$2y$10$AVdFQkvQRlhXL/5LY7O5ue/Vp9qZJ66FxlZTINy.4xq41fHWZlUze', '', '../Img/Student/Snapchat-1950822478.jpg'),
-(12, 'Bayo Lawal', 'nassar@gmail.com', '$2y$10$9VWQc9HjphgIgs5SQsr1E.4u9NLsi9eUVH.uBDH2xHL4uk2Vp5eqm', '', '');
+(12, 'Bayo Lawal', 'nassar@gmail.com', '$2y$10$0LHmVFyCN0/NqdesuE.Uh.B2h.TOiDx.G4URI0LWynCPmPUN9vHSW', '', '../Img/Student/141228f682285b6d43348a07c40e2f8a.jpg');
 
 --
 -- Indexes for dumped tables
@@ -227,7 +210,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `course`
@@ -239,7 +222,7 @@ ALTER TABLE `course`
 -- AUTO_INCREMENT for table `courseorder`
 --
 ALTER TABLE `courseorder`
-  MODIFY `co_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `co_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `lesson`

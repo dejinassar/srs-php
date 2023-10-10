@@ -15,11 +15,11 @@ if (isset($_REQUEST['updatePass'])) {
     } else {
         $stu_pass = $_REQUEST['stu_pass'];
 
-        // Validate the new password (e.g., length, complexity) before hashing
+        // Validate the new password before hashing
         if (strlen($stu_pass) < 8) {
             $passmsg = '<div class="alert alert-warning col-sm-6 ml-5 mt-2" role="alert">Password must be at least 8 characters long</div>';
         } else {
-            // Hash the password using password_hash()
+            // Hash the password 
             $hashed_password = password_hash($stu_pass, PASSWORD_BCRYPT);
 
             $sql = "UPDATE students SET stu_pass='$hashed_password' WHERE stu_email='$stu_email'";
