@@ -1,0 +1,35 @@
+
+
+/* Navbar Styles */
+.navbar {
+  background-color: #28a745; /* Green color */
+  color: #fff;
+  border-bottom: 1px solid #dee2e6;
+  z-index: 999;
+}
+
+.navbar-brand {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* Page Content Styles */
+#content {
+  margin-left: 250px;
+  padding-top: 20px;
+}
+
+/* Sample Content Styles */
+.sample-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  #content {
+    margin-left: 0;
+  }
+}
