@@ -14,6 +14,7 @@ $sql = "SELECT * FROM courseorder";
 $result = $conn->query($sql);
 $tot_sale = $result->num_rows;
 ?>
+
 <div class="col-sm-9 mt-5">
     <!-- Main Content -->
     <main class="px-4">
@@ -23,9 +24,9 @@ $tot_sale = $result->num_rows;
                     <div class="card bg-transparent border-secondary">
                         <div class="card-body">
                             <div class="clearfix">
-                                <i class="uil uil-video bg-danger p-3 font-2xl mr-3 float-left text-light rounded-circle"></i>
-                                <div class="h5 text-dark fw-bolder mb-0 mt-1 "><?php echo $tot_course; ?></div>
-                                <div class=" text-uppercase font-weight-bold font-xs medium text-dark fw-bolder">Courses</div>
+                                <i class="uil uil-video bg-danger p-3 font-2xl mr-3 float-left text-light rounded-circle ml-2"></i> <!-- Added ml-2 -->
+                                <div class="h5 text-dark fw-bolder mb-2 mt-0"><?php echo $tot_course; ?></div>
+                                <div class="text-uppercase font-weight-bold font-xs medium text-dark fw-bolder">Courses</div>
                             </div>
                             <div class="b-b-1 pt-3"></div>
                             <hr>
@@ -40,8 +41,8 @@ $tot_sale = $result->num_rows;
                         <div class="card-body">
                             <div class="clearfix">
                                 <i class="uil uil-user bg-success p-3 font-2xl mr-3 float-left text-light fw-bolder rounded-circle"></i>
-                                <div class="h5 text-dark fw-bolder mb-0 mt-1 "><?php echo $tot_stu; ?></div>
-                                <div class=" text-uppercase font-weight-bold font-xs medium text-dark fw-bolder">Students</div>
+                                <div class="h5 text-dark fw-bolder mb-2 mt-0"><?php echo $tot_stu; ?></div>
+                                <div class="text-uppercase font-weight-bold font-xs medium text-dark fw-bolder">Students</div>
                             </div>
                             <div class="b-b-1 pt-3"></div>
                             <hr>

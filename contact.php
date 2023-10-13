@@ -28,12 +28,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         padding: 10px;
         position: relative;
         margin-top: 20px;
-        /* Add space between the form and the message */
     }
 
     .contact__form {
         margin-top: 20px;
-        /* Adjust the margin-top value as needed */
     }
 
 
@@ -44,14 +42,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         padding: 10px;
         cursor: pointer;
         color: white;
-        /* Text color for close button */
         font-weight: bold;
-        /* Make the close button more prominent */
     }
 
     .close-button:hover {
         background-color: #333;
-        /* Change background color on hover */
     }
 </style>
 
@@ -171,12 +166,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             document.getElementById('message-popup').style.display = 'none';
         }
     </script>
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
 </body>

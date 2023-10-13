@@ -52,7 +52,7 @@ include_once("../DB_Files/db.php");
             <label for="course_price">Message</label>
             <input type="text" id="course_price" name="course_price" class="form-control" value="<?php if (isset($row['msg'])) {
                                                                                                         echo $row['msg'];
-                                                                                                    } ?>"readonly>
+                                                                                                    } ?>" readonly>
         </div>
         <br>
         <div class="text-center">
@@ -63,8 +63,3 @@ include_once("../DB_Files/db.php");
 
     </form>
 </div>
-
-
-<?php
-include_once("Footer.php");
-?>

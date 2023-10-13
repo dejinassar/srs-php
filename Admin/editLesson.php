@@ -10,7 +10,7 @@ if (isset($_REQUEST['reqUpdate'])) {
         $lname = $_REQUEST['lesson_name'];
         $cid = $_REQUEST['course_id'];
         $cname = $_REQUEST['course_name'];
-        $Llink=$_REQUEST['lesson_link'];
+        $Llink = $_REQUEST['lesson_link'];
 
         $sql = "UPDATE lesson SET lesson_id='$lid',lesson_name='$lname',lesson_link='$Llink',course_id='$cid',course_name='$cname' WHERE lesson_id='$lid'";
 
@@ -89,8 +89,3 @@ if (isset($_REQUEST['reqUpdate'])) {
 
     </form>
 </div>
-
-
-<?php
-include_once("Footer.php");
-?>

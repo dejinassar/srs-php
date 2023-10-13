@@ -61,21 +61,12 @@ if (isset($_REQUEST['courseSubmitBtn'])) {
         <br>
         <div class="form-group">
             <label for="course_author">Lecture</label>
-            <!-- <input type="text" id="course_author" name="course_author" class="form-control"<?php echo 'value="' . $c_auth . '"' ?>> -->
-            <select class="form-control" name="course_author" id="course_author">
-                                    <?php
-                                    $sql = "SELECT * FROM lectures";
-                                    $result = $conn->query($sql);
-                                    while ($row = $result->fetch_assoc()) {
-                                    ?>
-                                        <option value="none" selected disabled hidden>--Select Lecture--</option>
-                                        <option value="<?php echo $row['l_name']; ?>"><?php echo $row['l_name']; ?></option> <?php } ?>
-                                </select>
+            <input type="text" id="course_author" name="course_author" class="form-control" <?php echo 'value="' . $c_auth . '"' ?>>
         </div>
         <br>
         <div class="form-group">
             <label for="course_duration">Course Duration (Hours)</label>
-            <input type="number" id="course_duration" name="course_duration" class="form-control"<?php echo 'value="' . $c_dur . '"' ?>>
+            <input type="number" id="course_duration" name="course_duration" class="form-control" <?php echo 'value="' . $c_dur . '"' ?>>
         </div>
         <br>
         <div class="form-group">
@@ -85,7 +76,7 @@ if (isset($_REQUEST['courseSubmitBtn'])) {
         <br>
         <div class="form-group">
             <label for="course_lessons">Course Lessons</label>
-            <input type="number" id="course_lessons" name="course_lessons" class="form-control"<?php echo 'value="' . $c_less . '"' ?>>
+            <input type="number" id="course_lessons" name="course_lessons" class="form-control" <?php echo 'value="' . $c_less . '"' ?>>
         </div>
         <br>
         <div class="form-group">

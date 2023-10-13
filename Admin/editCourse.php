@@ -60,8 +60,8 @@ if (isset($_REQUEST['reqUpdate'])) {
         <div class="form-group">
             <label for="course_desc">Course Description</label>
             <input id="course_desc" name="course_desc" class="form-control" value="<?php if (isset($row['course_desc'])) {
-                echo $row['course_desc'];
-            } ?>">
+                                                                                        echo $row['course_desc'];
+                                                                                    } ?>">
             </input>
         </div>
         <br>
@@ -97,8 +97,8 @@ if (isset($_REQUEST['reqUpdate'])) {
             <label for="course_img">Course Image</label>
             <br>
             <img style="height: 300px; width:400px;" src="<?php if (isset($row['course_img'])) {
-                            echo $row['course_img'];
-                        } ?>" alt="" class="img-thumbnail">
+                                                                echo $row['course_img'];
+                                                            } ?>" alt="" class="img-thumbnail">
             <!-- <input type="file" id="course_img" name="course_img" class="form-control-file"> -->
         </div>
         <br>
@@ -111,8 +111,3 @@ if (isset($_REQUEST['reqUpdate'])) {
 
     </form>
 </div>
-
-
-<?php
-include_once("Footer.php");
-?>
