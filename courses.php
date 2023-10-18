@@ -14,7 +14,7 @@ include_once("DB_Files/db.php");
             font-family: 'Heebo', sans-serif;
             background-color: #f8f9fa;
         }
-
+    
         .category {
             background-color: #ffffff;
             padding: 40px 0;

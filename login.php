@@ -19,7 +19,7 @@ include_once("Inc/header.php");
         margin-bottom: 10px;
         border-radius: 5px;
         color: #ff0000;
-        font-weight: bold;
+        font-weight: bolder;
     }
 
     #error-box {
